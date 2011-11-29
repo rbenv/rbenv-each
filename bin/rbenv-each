@@ -7,33 +7,30 @@ function usage() {
   echo >&2 "       -v Verbose mode. Prints a header for each ruby."
 }
 while getopts vh option
-do	case "$option" in
-	v)	verbose=1;;
+do  case "$option" in
+  v)  verbose=1;;
   h) usage; exit 0;;
-	[?])
+  [?])
     usage;
-		exit 1;;
-	esac
+    exit 1;;
+  esac
 done
 shift $(($OPTIND-1))
 
 failed_rubies=""
 
 for ruby in `rbenv versions --bare`; do
-  if [ $verbose = 1 ]; then
-    echo -e "\033[1;34m[$ruby]:\033[0m \033[1;32m$@\033[0m";
-    echo -e "\033[1;34m******************************************************************\033[0m";
-  fi
+  began_at=$(date +%s)
+  echo -e "\033[1;34m[$ruby]:\033[0m \033[1;32m$@\033[0m";
   RBENV_VERSION=$ruby $@
-  if [ $verbose = 1 ]; then
-    echo
-  fi
   if [ $? != 0 ]; then
     failed_rubies="$failed_rubies $ruby"
   fi
+  diff=$(( $(date +%s) - $began_at ))
+  echo -e "\033[1;34m***\033[0m $ruby took \033[1;32m$diff\033[0m secs";
+  echo
 done
 
 if [ -n "$failed_rubies" ]; then
   echo -e "\033[1;31mFAILED IN:$failed_rubies\033[0m"
 fi
-
