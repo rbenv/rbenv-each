@@ -2,13 +2,23 @@
 
 verbose=0
 
+if ! which rbenv-whatis >/dev/null 2>&1; then
+  echo "rbenv-whatis plugin not installed, please run:" >&2
+  echo -e "\n\tgit clone https://github.com/rkh/rbenv-whatis.git $RBENV_ROOT/plugins/rbenv-whatis\n"  >&2
+  exit 1
+fi
+
 function usage() {
-  echo >&2 "Usage: rbenv each [-v] ..."
+  echo >&2 "Usage: rbenv each [-v] [-o rubies] ..."
+  echo >&2 "       -o Only run in specified versions, e.g. -o \"1.8, 1.9\""
   echo >&2 "       -v Verbose mode. Prints a header for each ruby."
 }
-while getopts vh option
+
+VERSIONS=`rbenv versions --bare`
+while getopts vho: option
 do	case "$option" in
 	v)	verbose=1;;
+  o)  VERSIONS=$OPTARG;;
   h) usage; exit 0;;
 	[?])
     usage;
@@ -17,9 +27,11 @@ do	case "$option" in
 done
 shift $(($OPTIND-1))
 
+rubies=$(echo $VERSIONS | tr "," "\n")
 failed_rubies=""
 
-for ruby in `rbenv versions --bare`; do
+for ruby in $rubies; do
+  ruby=`command rbenv whatis $ruby`
   if [ $verbose = 1 ]; then
     echo -e "\033[1;34m[$ruby]:\033[0m \033[1;32m$@\033[0m";
     echo -e "\033[1;34m******************************************************************\033[0m";
