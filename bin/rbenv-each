@@ -21,14 +21,18 @@ failed_rubies=""
 
 for ruby in `rbenv versions --bare`; do
   if [ $verbose = 1 ]; then
-    echo -e "\033[1;34m[$ruby]:\033[0m \033[1;32m$@\033[0m";
-    echo -e "\033[1;34m******************************************************************\033[0m";
+    echo -e "[$ruby]: $@";
+    echo -e "******************************************************************";
+  fi
+  if [[ $ruby != [1-2]* ]]; then
+    continue;
   fi
   RBENV_VERSION=$ruby "$@"
+  result=$?
   if [ $verbose = 1 ]; then
     echo
   fi
-  if [ $? != 0 ]; then
+  if [ $result != 0 ]; then
     failed_rubies="$failed_rubies $ruby"
   fi
 done
