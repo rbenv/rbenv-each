@@ -24,6 +24,9 @@ for ruby in `rbenv versions --bare`; do
     echo -e "[$ruby]: $@";
     echo -e "******************************************************************";
   fi
+  if [[ $ruby != [1-2]* ]]; then
+    continue;
+  fi
   RBENV_VERSION=$ruby "$@"
   result=$?
   if [ $verbose = 1 ]; then
