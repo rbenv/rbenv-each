@@ -25,14 +25,29 @@ if [ -z "$1" ]; then
   exit 1
 fi
 
+GRAY=""
+RED=""
+YELLOW=""
+NORMAL=""
+
+if [ -t 1 ]; then
+  GRAY="\033[1;30m"
+  RED="\033[0;31m"
+  YELLOW="\033[0;33m"
+  NORMAL="\033[0m"
+fi
+
 failed_rubies=""
 
 trap "exit 1" INT
 
 for ruby in $(rbenv versions --bare); do
   if [ -n "$verbose" ]; then
-    echo -e "\033[1;34m[$ruby]:\033[0m \033[1;32m$@\033[0m";
-    echo -e "\033[1;34m******************************************************************\033[0m";
+    header="===[$ruby]==================================================================="
+    header="${header:0:72}"
+    header="${header/[/[${YELLOW}}"
+    header="${header/]/${GRAY}]}"
+    echo -e "${GRAY}${header}${NORMAL}"
   fi
 
   STATUS=0
@@ -43,6 +58,6 @@ for ruby in $(rbenv versions --bare); do
 done
 
 if [ -n "$failed_rubies" ]; then
-  echo -e "\033[1;31mFAILED IN:$failed_rubies\033[0m"
+  echo -e "${RED}FAILED IN:${failed_rubies}${NORMAL}"
   exit 1
 fi
