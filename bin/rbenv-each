@@ -42,4 +42,5 @@ done
 
 if [ -n "$failed_rubies" ]; then
   echo -e "\033[1;31mFAILED IN:$failed_rubies\033[0m"
+  exit 1
 fi
