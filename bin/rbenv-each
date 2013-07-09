@@ -4,8 +4,8 @@ set -e
 verbose=""
 
 usage() {
-  echo >&2 "Usage: rbenv each [-v] ..."
-  echo >&2 "       -v Verbose mode. Prints a header for each ruby."
+  echo "Usage: rbenv each [-v] <command>"
+  echo "       -v Verbose mode. Prints a header for each ruby."
 }
 
 while getopts ':vh' option; do
@@ -13,12 +13,17 @@ while getopts ':vh' option; do
   'v') verbose=1 ;;
   'h') usage; exit 0 ;;
   '?')
-    usage
+    usage >&2
     exit 1
     ;;
   esac
 done
 shift $(($OPTIND-1))
+
+if [ -z "$1" ]; then
+  usage >&2
+  exit 1
+fi
 
 failed_rubies=""
 
