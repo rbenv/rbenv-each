@@ -11,12 +11,8 @@ $ git clone https://github.com/chriseppstein/rbenv-each.git
 
 ## Usage
 
-You can get help for the `each` command by passing the `-h` option.
-
 ```
-$ rbenv each -h
-Usage: rbenv each [-v] ...
-       -v Verbose mode. Prints a header for each ruby.
+$ rbenv help each
 ```
 
 Verbose mode will print a header for each ruby so you can distinguish
