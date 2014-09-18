@@ -30,13 +30,13 @@ case "$1" in
   ;;
 esac
 
-GRAY=""
+BOLD=""
 RED=""
 YELLOW=""
 NORMAL=""
 
 if [ -t 1 ]; then
-  GRAY="\033[1;30m"
+  BOLD="\033[0;1m"
   RED="\033[0;31m"
   YELLOW="\033[0;33m"
   NORMAL="\033[0m"
@@ -51,8 +51,8 @@ for ruby in $(rbenv versions --bare); do
     header="===[$ruby]==================================================================="
     header="${header:0:72}"
     header="${header/[/[${YELLOW}}"
-    header="${header/]/${GRAY}]}"
-    echo -e "${GRAY}${header}${NORMAL}"
+    header="${header/]/${BOLD}]}"
+    echo -e "${BOLD}${header}${NORMAL}"
   fi
 
   STATUS=0
