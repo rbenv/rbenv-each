@@ -1,11 +1,11 @@
 ## Installation
 
-To install rbenv-each, clone this repository into your ~/.rbenv/plugins directory. (You'll need a recent version of rbenv that supports plugin bundles.)
+To install rbenv-each, clone this repository into your rbenv plugins directory. (You'll need a recent version of rbenv that supports plugin bundles.)
 
 
 ```
-$ mkdir -p ~/.rbenv/plugins
-$ git clone https://github.com/chriseppstein/rbenv-each.git ~/.rbenv/plugins/rbenv-each
+$ mkdir -p "$(rbenv root)"/plugins
+$ git clone https://github.com/chriseppstein/rbenv-each.git "$(rbenv root)"/plugins/rbenv-each
 ```
 
 ## Usage
