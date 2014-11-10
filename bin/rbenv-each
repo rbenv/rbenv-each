@@ -7,7 +7,7 @@
 # Executes a command for each Ruby version by setting RBENV_VERSION.
 # Failures are collected and reported at the end.
 #
-#    -v  Verbose mode. Prints a header for each ruby.
+#    -q  Quiet mode. Don't print header for each ruby.
 #
 set -e
 [ -n "$RBENV_DEBUG" ] && set -x
@@ -18,8 +18,8 @@ if [ "$1" = "--complete" ]; then
   exit
 fi
 
-if [ "$1" = "-v" ]; then
-  verbose=1
+if [ "$1" = "-q" ]; then
+  quiet=1
   shift
 fi
 
@@ -47,7 +47,7 @@ failed_rubies=""
 trap "exit 1" INT
 
 for ruby in $(rbenv versions --bare); do
-  if [ -n "$verbose" ]; then
+  if [ -z "$quiet" ]; then
     header="===[$ruby]==================================================================="
     header="${header:0:72}"
     header="${header/[/[${YELLOW}}"
@@ -59,7 +59,7 @@ for ruby in $(rbenv versions --bare); do
   RBENV_VERSION="$ruby" "$@" || STATUS=$?
   [ $STATUS -eq 0 ] || failed_rubies="$failed_rubies $ruby"
 
-  [ -n "$verbose" ] && echo
+  [ -z "$quiet" ] && echo
 done
 
 if [ -n "$failed_rubies" ]; then
