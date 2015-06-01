@@ -5,7 +5,7 @@ To install rbenv-each, clone this repository into your rbenv plugins directory. 
 
 ```
 $ mkdir -p "$(rbenv root)"/plugins
-$ git clone https://github.com/chriseppstein/rbenv-each.git "$(rbenv root)"/plugins/rbenv-each
+$ git clone https://github.com/rbenv/rbenv-each.git "$(rbenv root)"/plugins/rbenv-each
 ```
 
 ## Usage
