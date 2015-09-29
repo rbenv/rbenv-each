@@ -9,7 +9,6 @@
 #
 #    -v  Verbose mode. Prints a header for each ruby.
 #
-set -e
 [ -n "$RBENV_DEBUG" ] && set -x
 
 # Provide rbenv completions
@@ -55,9 +54,8 @@ for ruby in $(rbenv versions --bare); do
     echo -e "${GRAY}${header}${NORMAL}"
   fi
 
-  STATUS=0
-  RBENV_VERSION="$ruby" "$@" || STATUS=$?
-  [ $STATUS -eq 0 ] || failed_rubies="$failed_rubies $ruby"
+  RBENV_VERSION="$ruby" "$@"
+  [ $? -eq 0 ] || failed_rubies="$failed_rubies $ruby"
 
   [ -n "$verbose" ] && echo
 done
