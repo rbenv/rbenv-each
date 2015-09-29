@@ -55,9 +55,7 @@ for ruby in $(rbenv versions --bare); do
     echo -e "${GRAY}${header}${NORMAL}"
   fi
 
-  STATUS=0
-  RBENV_VERSION="$ruby" "$@" || STATUS=$?
-  [ $STATUS -eq 0 ] || failed_rubies="$failed_rubies $ruby"
+  RBENV_VERSION="$ruby" "$@" || failed_rubies="$failed_rubies $ruby"
 
   [ -n "$verbose" ] && echo
 done
