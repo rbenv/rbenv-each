@@ -19,12 +19,11 @@ if [ "$1" = "--complete" ]; then
   exit
 fi
 
-if [ "$1" = "-v" ]; then
-  verbose=1
-  shift
-fi
-
 case "$1" in
+  -v | --verbose )
+    verbose=1
+    shift
+    ;;
   help | --help )
     rbenv-help --usage each
     exit
