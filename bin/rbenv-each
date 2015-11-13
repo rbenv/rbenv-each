@@ -15,7 +15,7 @@ set -e
 case "$1" in
 # Provide rbenv completions
   --complete )
-    echo -v
+    echo --verbose
     rbenv shims --short
     exit
     ;;
