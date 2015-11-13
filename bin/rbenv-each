@@ -25,10 +25,14 @@ if [ "$1" = "-v" ]; then
 fi
 
 case "$1" in
-""  | -* )
-  rbenv-help --usage each >&2
-  exit 1
-  ;;
+  help | --help )
+    rbenv-help --usage each
+    exit
+    ;;
+  ""  | -* )
+    rbenv-help --usage each >&2
+    exit 1
+    ;;
 esac
 
 GRAY=""
