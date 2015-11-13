@@ -13,21 +13,25 @@ set -e
 [ -n "$RBENV_DEBUG" ] && set -x
 
 # Provide rbenv completions
-if [ "$1" = "--complete" ]; then
-  echo -v
-  exit
-fi
-
-if [ "$1" = "-v" ]; then
-  verbose=1
-  shift
-fi
-
 case "$1" in
-""  | -* )
-  rbenv-help --usage each >&2
-  exit 1
-  ;;
+  --complete )
+    echo --help
+    echo --verbose
+    rbenv shims --short
+    exit
+    ;;
+  -v | --verbose )
+    verbose=1
+    shift
+    ;;
+  help | --help )
+    rbenv-help --usage each
+    exit
+    ;;
+  ""  | -* )
+    rbenv-help --usage each >&2
+    exit 1
+    ;;
 esac
 
 GRAY=""
