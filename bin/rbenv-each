@@ -12,9 +12,10 @@
 set -e
 [ -n "$RBENV_DEBUG" ] && set -x
 
-case "$1" in
 # Provide rbenv completions
+case "$1" in
   --complete )
+    echo --help
     echo --verbose
     rbenv shims --short
     exit
