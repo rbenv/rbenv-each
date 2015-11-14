@@ -24,7 +24,7 @@ case "$1" in
     verbose=1
     shift
     ;;
-  help | --help )
+  --help )
     rbenv-help --usage each
     exit
     ;;
