@@ -17,7 +17,6 @@ case "$1" in
   --complete )
     echo --help
     echo --verbose
-    rbenv shims --short
     exit
     ;;
   -v | --verbose )
