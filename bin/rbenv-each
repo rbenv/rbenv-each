@@ -24,7 +24,7 @@ case "$1" in
     shift
     ;;
   --help )
-    rbenv-help --usage each
+    rbenv-help each
     exit
     ;;
   ""  | -* )
