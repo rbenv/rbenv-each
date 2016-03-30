@@ -38,7 +38,6 @@ while [[ $1 == -* ]]; do
       ;;
     -v | --verbose )
       verbose=1
-      shift
       ;;
     -h | --help )
       rbenv-help each
