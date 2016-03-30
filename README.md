@@ -22,4 +22,5 @@ the output.
 ```
 $ rbenv each bundle install
 $ rbenv each -v rake test
+$ rbenv each --with-aliases bundle check
 ```
