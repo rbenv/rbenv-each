@@ -49,7 +49,7 @@ failed_rubies=""
 
 trap "exit 1" INT
 
-for ruby in $(rbenv versions --bare); do
+for ruby in $(rbenv versions --bare --skip-aliases); do
   if [ -n "$verbose" ]; then
     header="===[$ruby]==================================================================="
     header="${header:0:72}"
