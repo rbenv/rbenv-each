@@ -17,9 +17,13 @@ $ rbenv help each
 Verbose mode will print a header for each ruby so you can distinguish
 the output.
 
+**note**: Aliases ([rbenv-aliases][]) or symlinks are skipped.
+
 ### Examples:
 
 ```
 $ rbenv each bundle install
 $ rbenv each -v rake test
 ```
+
+[rbenv-aliases]: https://github.com/rbenv/rbenv-aliases
